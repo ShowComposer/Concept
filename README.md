@@ -39,4 +39,11 @@ Has a lineup and all the "paperwork" needed to run a show.
 Manages and monitors ShowComposer itself: Discovering and provisioning of new nodes, resource overview, data storage, project export- and import, redundancy and failover
 
 # Technical Overview
-*Work in progress*
+In this part the main ideas of Show Composer are explained. They are: Which kind of participants in a network you can have, and (basically) how they communicate/data is stored (SC-data).
+## Nodes
+A (virtual) device taking part in a Show Composer-Session is refered as a "node". A node can have multiple Modules on it.
+At this time, the following Node Types are planned:
+- **Master or Server** core of every Show Composer installation, at least one needed. Does all the computation and logical stuff. Can run on a headless system (Server). If multiple masters are in a network, one is the primary master, and the others are standby masters, taking computational load from the master and taking over when the primary is gone.
+- **User Interface** Means everything displaying information and taking user input which is connected over SC-data. Webinterface is not a Node, but communicates over HTTP(S) and Websockets to the master.
+- **Satellite** A satellite is a small application (or hardware), which runs headless and is communicating over SC-data. A Satellite does I/O for stuff which can't have I/O at the master: MIDI, DMX (without ArtNet), Audio, or simple Buttons. The idea is to configure satellite fully trough the User Interface, so you just plug in power and everything runs.
+- **Cloud** A cloud node is not "on site", but at an server over the internet. The connection to a cloud node is considerd unstable and insecure, so it's not used for critical live stuff and the connection is encrypted by default. All the permanent data is backed up into the cloud regulary. Another usecase is remote editing/preprogramming and merging of changes with the local, "onsite" system.
