@@ -22,6 +22,21 @@ There are many ways: If you know JavaScript, you can look into our implementatio
 Just come up with your idea!
 
 # Modules
-*Work in progress*
+Show Composer is split into modules, which all handle "their thing". The following modules are planned:
+## Visuals
+Bundles the control, effects etc. of all Visual Elements: Videos, "classical" Lighning and everything with pixels
+## Communicator
+Handles all inputs/outputs, patches them and map them to actions.
+Examples:
+- ArtNet
+- MIDI
+- OSC
+- HTTP
+- MQTT
+## Manager
+Has a lineup and all the "paperwork" needed to run a show.
+## System
+Manages and monitors ShowComposer itself: Discovering and provisioning of new nodes, resource overview, data storage, project export- and import, redundancy and failover
+
 # Technical Overview
 *Work in progress*
