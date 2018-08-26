@@ -55,7 +55,7 @@ All the data is handled by a central component, the router, which ensures every 
 
 ### Types
 The following types are supported:
-STATIC: Is part of the project definition, saved and eventually exported
-LIVE: has a value, but it's not persistent (e.g. step of the current cuelist, current channel value)
-TICK: only fires in a moment, describes an event (e.g. button press)
-LINK: this node is an alias for another node (e.g. `visuals.fixtures.group['frontlight'].fixture[0]`  is an alias for `visuals.fixtures.id[10]`)
+- STATIC: Is part of the project definition, saved and eventually exported
+- LIVE: has a value, but it's not persistent (e.g. step of the current cuelist, current channel value)
+- TICK: only fires in a moment, describes an event (e.g. button press)
+- LINK: this node is an alias for another node (e.g. `visuals.fixtures.group['frontlight'].fixture[0]`  is an alias for `visuals.fixtures.id[10]`)
