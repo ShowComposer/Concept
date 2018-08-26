@@ -47,3 +47,15 @@ At this time, the following Node Types are planned:
 - **User Interface** Means everything displaying information and taking user input which is connected over SC-data. Webinterface is not a Node, but communicates over HTTP(S) and Websockets to the master.
 - **Satellite** A satellite is a small application (or hardware), which runs headless and is communicating over SC-data. A Satellite does I/O for stuff which can't have I/O at the master: MIDI, DMX (without ArtNet), Audio, or simple Buttons. The idea is to configure satellite fully trough the User Interface, so you just plug in power and everything runs.
 - **Cloud** A cloud node is not "on site", but at an server over the internet. The connection to a cloud node is considerd unstable and insecure, so it's not used for critical live stuff and the connection is encrypted by default. All the permanent data is backed up into the cloud regulary. Another usecase is remote editing/preprogramming and merging of changes with the local, "onsite" system.
+## Data
+Show Composer will use an object-based system for storing all the data. One example:
+`visuals.fixtures.id[0].name="testfixture"`
+
+All the data is handled by a central component, the router, which ensures every change and state will be on the right place the right time. It's possible to subscribe to one hierarchy, for example get all changes from `visuals.fixtues.id[0].params`.
+
+### Types
+The following types are supported:
+STATIC: Is part of the project definition, saved and eventually exported
+LIVE: has a value, but it's not persistent (e.g. step of the current cuelist, current channel value)
+TICK: only fires in a moment, describes an event (e.g. button press)
+LINK: this node is an alias for another node (e.g. `visuals.fixtures.group['frontlight'].fixture[0]`  is an alias for `visuals.fixtures.id[10]`)
