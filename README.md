@@ -53,6 +53,8 @@ Show Composer will use an object-based system for storing all the data. One exam
 
 All the data is handled by a central component, the router, which ensures every change and state will be on the right place the right time. It's possible to subscribe to one hierarchy, for example get all changes from `visuals.fixtues.id[0].params`.
 
+Modules can subscribe to changes on some objects (and their childs). All changes are transmitted to the local broker. Non-static changes are only forwarded if a subscription is available. Some objects - e.g. system - are subscribed automatically.
+
 ### Types
 The following types are supported:
 - STATIC: Is part of the project definition, saved and eventually exported
@@ -75,8 +77,34 @@ If a core-instance receives a change on a client-connection, this change should 
 Inside the TCP-based protocol the following methods are used (C: only by client, S: only by server, C/S: both):
 
 C: `<REQ_ID> INIT <PROT_VERS>` inits the connection with the server, sends its Protocol Version
+
 C: `<REQ_ID> INIT_REUSE <PROT_VERS> <CONN_ID>` inits the connection with the server while reusing an old connection ID, sends its Protocol Version. Mainly used after a connection is broken.
+
 S: `<REQ_ID> INIT_ACK <PROT_VERS> <CONN_ID>` Acknowledge of the connection, sends server protocol version and connection id, connection is now up.
+
+C/S: `<REQ_ID> CLOSE` Closes the connection.
+
+C/S: `<REQ_ID> PING` used to measure time. The opposite site should immediately return with the `<REQ_ID> PONG`-Command.
+
+C/S: `<REQ_ID> SET <TYPE> <KEY>(=<VALUE>) (<RES>) ` Creates or updates the key with it's Type to Value. If no value is present, true is assumed.
+
+C/S: `<REQ_ID> SET_RES <OK> <MESSAGE>` Response to `SET`. `<OK>` is a error code (0: success), `<MESSAGE>` contains further details. Response is only send if (`<RES>=1`)
+
+C/S: `<REQ_ID> DEL <KEY>` Deletes `<KEY>`.
+
+C/S: `<REQ_ID> DEL_RES <OK> <MESSAGE>` Response to `DEL`
+
+C/S: `<REQ_ID> SUB <KEY>` Subscribe changes on `<KEY>`.
+
+C/S: `<REQ_ID> SUB_RES <OK> <MESSAGE>` Response to `SUB`
+
+C/S: `<REQ_ID> UNSUB <KEY>` unsubscribe changes on `<KEY>`.
+
+C/S: `<REQ_ID> UNSUB_RES <OK> <MESSAGE>` Response to `UNSUB`
+
+C/S: `<REQ_ID> DUMP <KEY>` Requests a dump on object `<KEY>` and child's. The dump is performed trough multiple `SET`-Commands.
+
+C/S: `<REQ_ID> DUMP_RES <OK> <MESSAGE>` Response to `DUMP`
 
 Note: REQ_ID is an integer used to identify the response.
 
