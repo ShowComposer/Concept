@@ -70,3 +70,36 @@ All core-instances should be connected in a full mesh to each other (every core 
 
 If a core-instance receives a change on a client-connection, this change should be forwarded to all backend-connections. If a change is received via an backend-connection, it should be forwarded only to the client-connections to avoid loops.
 
+### Methods
+
+Inside the TCP-based protocol the following methods are used (C: only by client, S: only by server, C/S: both):
+
+C: `<REQ_ID> INIT <PROT_VERS>` inits the connection with the server, sends its Protocol Version
+C: `<REQ_ID> INIT_REUSE <PROT_VERS> <CONN_ID>` inits the connection with the server while reusing an old connection ID, sends its Protocol Version. Mainly used after a connection is broken.
+S: `<REQ_ID> INIT_ACK <PROT_VERS> <CONN_ID>` Acknowledge of the connection, sends server protocol version and connection id, connection is now up.
+
+Note: REQ_ID is an integer used to identify the response.
+
+### Connection states
+Each connection has its own connection id. All states of this connection are stored inside `system.connections[<CONN_ID>]` and are handled/exported by the datalib.
+
+The following parameters should be existent:
+
+`state`:`UP`,`CLOSED` or `BROKEN`
+
+`latency`: Latency in µs
+
+`server`: Reference to server host
+
+`client`: Reference to client host
+
+`time_established`: When the connection was established the last time, Unixtime or undefinded
+
+`time_closed`: Time the connection was closed normally, Unixtime or undefined
+
+`time_broken`: Time the connection broke, Unixtime or undefined
+
+
+
+
+
