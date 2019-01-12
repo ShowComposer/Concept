@@ -59,3 +59,14 @@ The following types are supported:
 - LIVE: has a value, but it's not persistent (e.g. step of the current cuelist, current channel value)
 - TICK: only fires in a moment, describes an event (e.g. button press)
 - LINK: this node is an alias for another node (e.g. `visuals.fixtures.group['frontlight'].fixture[0]`  is an alias for `visuals.fixtures.id[10]`)
+
+### Connection types
+
+There are two different types of connections: **Backend** and **Client**.
+
+Backend-connections are used to connect all cores in a installation to each other, while Client-connections are used to connect the modules to the core.
+
+All core-instances should be connected in a full mesh to each other (every core has a connection to each other core), while a client is only connected to a single core (usually the local one).
+
+If a core-instance receives a change on a client-connection, this change should be forwarded to all backend-connections. If a change is received via an backend-connection, it should be forwarded only to the client-connections to avoid loops.
+
