@@ -117,6 +117,8 @@ The following parameters should be existent:
 
 `latency`: Latency in µs
 
+`last_ping`: Last successful ping, unix-time
+
 `server`: Reference to server host
 
 `client`: Reference to client host
