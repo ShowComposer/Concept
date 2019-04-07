@@ -98,9 +98,9 @@ C/S: `<REQ_ID> SUB <KEY>` Subscribe changes on `<KEY>`.
 
 C/S: `<REQ_ID> SUB_RES <SUB_ID>` Response to `SUB`
 
-C/S: `<REQ_ID> S_SET <SUB_ID> <TYPE> <KEY>(=<VALUE>) ` Creates or updates the key with it's Type to Value. If no value is present, true is assumed. Operation triggered by Subscription `<SUB_ID>`, no response.
+C/S: `<REQ_ID> SMSG <SUB_ID> SET <TYPE> <KEY>(=<VALUE>) ` Creates or updates the key with it's Type to Value. If no value is present, true is assumed. Operation triggered by Subscription `<SUB_ID>`, no response.
 
-C/S: `<REQ_ID> S_DEL <SUB_ID> <KEY>` Deletes `<KEY>`. Triggered by `<SUB_ID>`, no response.
+C/S: `<REQ_ID> SMSG <SUB_ID> DEL <KEY>` Deletes `<KEY>`. Triggered by `<SUB_ID>`, no response.
 
 C/S: `<REQ_ID> UNSUB <SUB_ID>` unsubscribe changes on `<KEY>`.
 
