@@ -112,9 +112,9 @@ C/S: `<REQ_ID> UNSUB <SUB_ID>` unsubscribe changes on `<KEY>`.
 
 C/S: `<REQ_ID> UNSUB_RES <OK> <MESSAGE>` Response to `UNSUB`
 
-C/S: `<REQ_ID> DUMP <KEY>` Requests a dump on object `<KEY>` and child's. The dump is performed trough multiple `SET`-Commands.
+C/S: `<REQ_ID> DUMP <KEY>` Requests a dump on object `<KEY>` and child's. The dump is performed trough base64-POJO in DUMP_RES.
 
-C/S: `<REQ_ID> DUMP_RES <OK> <MESSAGE>` Response to `DUMP`
+C/S: `<REQ_ID> DUMP_RES <VALUE>` Response to `DUMP`. Value contains base64-encoded POJO.
 
 Note: REQ_ID is an integer used to identify the response.
 
