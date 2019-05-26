@@ -90,6 +90,10 @@ C/S: `<REQ_ID> SET <TYPE> <KEY>(=<VALUE>) (<RES>) ` Creates or updates the key w
 
 C/S: `<REQ_ID> SET_RES <OK> <MESSAGE>` Response to `SET`. `<OK>` is a error code (0: success), `<MESSAGE>` contains further details. Response is only send if (`<RES>=1`)
 
+C/S: `<REQ_ID> ASSIGN <TYPE> <KEY>=<VALUE> (<RES>) ` Assigns (merges) the key with it's Type to Value. Value is a base64-encoded, stringifyed POJO. Only triggers one Update. Useful for bulk operations.
+
+C/S: `<REQ_ID> ASSIGN_RES <OK> <MESSAGE>` Response to `ASSIGN`. `<OK>` is a error code (0: success), `<MESSAGE>` contains further details. Response is only send if (`<RES>=1`)
+
 C/S: `<REQ_ID> DEL <KEY>` Deletes `<KEY>`.
 
 C/S: `<REQ_ID> DEL_RES <OK> <MESSAGE>` Response to `DEL`
@@ -99,6 +103,8 @@ C/S: `<REQ_ID> SUB <KEY>` Subscribe changes on `<KEY>`.
 C/S: `<REQ_ID> SUB_RES <SUB_ID>` Response to `SUB`
 
 C/S: `<REQ_ID> SMSG <SUB_ID> SET <TYPE> <KEY>(=<VALUE>) ` Creates or updates the key with it's Type to Value. If no value is present, true is assumed. Operation triggered by Subscription `<SUB_ID>`, no response.
+
+C/S: `<REQ_ID> SMSG <SUB_ID> ASSIGN <TYPE> <KEY>=<VALUE> (<RES>) ` Assigns (merges) the key with it's Type to Value. Value is a base64-encoded, stringifyed POJO. Useful for bulk operations. Operation triggered by Subscription `<SUB_ID>`, no response.
 
 C/S: `<REQ_ID> SMSG <SUB_ID> DEL <KEY>` Deletes `<KEY>`. Triggered by `<SUB_ID>`, no response.
 
