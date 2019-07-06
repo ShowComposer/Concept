@@ -59,7 +59,7 @@ Modules can subscribe to changes on some objects (and their childs). All changes
 The following types are supported:
 - STATIC: Is part of the project definition, saved and eventually exported
 - LIVE: has a value, but it's not persistent (e.g. step of the current cuelist, current channel value)
-- TICK: only fires in a moment, describes an event (e.g. button press). Value is firing time in microseconds.
+- TICK: only fires in a moment, describes an event (e.g. button press). Value is firing time in milliseconds.
 - LINK: this node is an alias for another node (e.g. `visuals.fixtures.group['frontlight'].fixture[0]`  is an alias for `visuals.fixtures.id[10]`)
 
 ### Connection types
